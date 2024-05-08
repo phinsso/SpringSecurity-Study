@@ -4,11 +4,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration // 해당 클래스가 설정 클래스임을 선언
 @EnableWebSecurity // 해당 클래스가 스프링 시큐리티에게 관리됨
 public class SecurityConfig {
+
+    // 사용자 인증시에 비밀번호에 대해 단방향 해시 암호화를 진행하여 저장되어 있는 비밀번호와 대조하기 때문에 회원가입시 비밀번호 항목에 대해 암호화를 진행해야 한다.
+    // BCryptPasswordEncoder 클래스를 리턴하는 메서드를 빈으로 등록하여 사용하기
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     // 각 경로에 따른 접근 권한 설정
     @Bean
