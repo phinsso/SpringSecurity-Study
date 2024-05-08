@@ -14,8 +14,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.
-                authorizeHttpRequests((auth) -> auth
+        http
+                .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/login").permitAll() // permitAll(): 모든 사용자 접근 허용
                         .requestMatchers("admin").hasRole("ADMIN") // hasRole(): 사용자가 주어진 역할이 있다면 접근 허용
                         // **(와일드카드): 각 유저아이디에 해당하는 마이페이지 등의 여러값이 들어갈 수 있는 주소에 사용
@@ -25,6 +25,17 @@ public class SecurityConfig {
                         // authenticated(): 로그인한 사용자만 접근을 허용
                         .anyRequest().authenticated()
                 );
+
+        http
+                // loginPage(): 로그인 페이지의 경로를 설정해주면, 특정 역할이나 권한이 필요한 페이지에 접근했을 때 오류 페이지가 발생하지 않고 스프링이 자동으로 로그인 페이지로 리다이렉션을 해줌
+                .formLogin((auth) -> auth.loginPage("/login")
+                        // loginProcessingUrl(): 해당 url로 요청시 스프링 시큐리티가 로그인 과정을 진행해줌
+                        .loginProcessingUrl("/loginProc")
+                        .permitAll()
+                );
+
+        http
+                .csrf((auth) -> auth.disable());
 
         return http.build();
     }
