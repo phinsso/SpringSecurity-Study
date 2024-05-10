@@ -25,7 +25,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/login", "/loginProc", "/join", "/joinProc").permitAll() // permitAll(): 모든 사용자 접근 허용
-                        .requestMatchers("admin").hasRole("ADMIN") // hasRole(): 사용자가 주어진 역할이 있다면 접근 허용
+                        .requestMatchers("/admin").hasRole("ADMIN") // hasRole(): 사용자가 주어진 역할이 있다면 접근 허용
                         // **(와일드카드): 각 유저아이디에 해당하는 마이페이지 등의 여러값이 들어갈 수 있는 주소에 사용
                         // hasAnyRole(): 사용자가 주어진 역할이 있다면 접근 허용 (여러 역할)
                         .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
