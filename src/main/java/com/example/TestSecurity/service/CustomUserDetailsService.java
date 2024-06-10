@@ -10,8 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-// UserDetailsService: 스프링 시큐리티에서 유저의 정보를 가져오는 인터페이스
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService { // UserDetailsService: 스프링 시큐리티에서 유저의 정보를 가져오는 인터페이스
 
     @Autowired
     private UserRepository userRepository;

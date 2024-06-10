@@ -30,7 +30,7 @@ public class JoinService {
         // setter로 값 주입
         data.setUsername(joinDTO.getUsername());
         data.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword())); // 입력된 비밀번호를 암호화하여 데이터베이스에 저장
-        data.setRole("ROLE_USER");
+        data.setRole("ROLE_ADMIN");
 
         userRepository.save(data);
     }
